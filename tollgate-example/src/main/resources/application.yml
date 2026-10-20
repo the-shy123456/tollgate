@@ -1,0 +1,21 @@
+spring:
+  main:
+    web-application-type: none
+
+logging:
+  level:
+    root: warn
+    io.tollgate: info
+
+tollgate:
+  enabled: true
+  cache:
+    enabled: true
+    similarity-threshold: 0.75
+    ttl: 6h
+    max-entries-per-tenant: 500
+  quota:
+    enabled: false
+  audit:
+    enabled: true
+    capacity: 200

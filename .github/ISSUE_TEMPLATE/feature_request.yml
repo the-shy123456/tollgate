@@ -1,0 +1,77 @@
+name: Feature request
+description: Propose a capability or a change in behaviour
+title: "[Feature] "
+labels: [ "enhancement", "needs-triage" ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before writing, please check the roadmap in the README — the item may already be planned,
+        and a focused comment on the existing discussion is more useful than a new issue.
+
+        Changes to the pipeline order, the cache key composition, the routing score or the public
+        API surface are design changes. They need a short discussion before code, so that nobody
+        writes a pull request that has to be thrown away. See `CONTRIBUTING.md`.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: |
+        Describe the situation, not the solution. "Our support team's LLM bill tripled last month
+        and we cannot tell which product caused it" is more useful than "add a per-product metric".
+      placeholder: |
+        We run three product lines through one gateway. Finance asks for a monthly breakdown per
+        product line, and today we can only report per tenant, which is one dimension short.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like Tollgate to do?
+      placeholder: |
+        Allow a request to declare an arbitrary set of tags, and include those tags as a grouping
+        dimension in `CostReport`.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What have you tried or considered?
+      description: Including workarounds makes it much easier to judge how badly this is needed.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Which part would this touch?
+      options:
+        - tollgate-core
+        - tollgate-spring-boot-starter
+        - documentation
+        - new module
+        - not sure
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: Design constraints
+      description: These two are non-negotiable, per `CONTRIBUTING.md`.
+      options:
+        - label: The proposal does not require a third-party runtime dependency in tollgate-core
+          required: true
+        - label: The proposal does not allow a cache hit to cross a tenant or a literal value
+          required: true
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Would you be willing to implement this?
+      options:
+        - label: I can open a pull request for this
+          required: false

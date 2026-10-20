@@ -1,0 +1,91 @@
+name: Bug report
+description: Something behaves differently than documented
+title: "[Bug] "
+labels: [ "bug", "needs-triage" ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this.
+
+        **If this is a security issue — a cache returning another tenant's answer, or another
+        order's answer — please stop and report it privately via
+        [Security Advisories](../../security/advisories/new) instead.**
+
+  - type: dropdown
+    id: module
+    attributes:
+      label: Affected module
+      options:
+        - tollgate-core
+        - tollgate-spring-boot-starter
+        - tollgate-example
+        - documentation
+        - not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+      placeholder: |
+        I expected `tollgate.call("acme", "退款流程是什么")` to return a cache miss,
+        because the answer depends on data that changed this morning.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened?
+      placeholder: |
+        It returned a cached answer stored six hours ago.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: |
+        A failing test is ideal. Failing that, the smallest configuration and code path that
+        shows the problem. Please do not paste a whole application.
+      render: java
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Tollgate version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: jdk
+    attributes:
+      label: JDK vendor and version
+      placeholder: "Temurin 17.0.16"
+    validations:
+      required: true
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Relevant configuration
+      description: The `tollgate.*` properties you are running with, with secrets removed.
+      render: yaml
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have searched existing issues and this is not a duplicate
+          required: true
+        - label: This is not a security issue (those go through Security Advisories)
+          required: true
