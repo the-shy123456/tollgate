@@ -11,6 +11,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Build on JDK ${{ matrix.java }}
@@ -31,19 +34,21 @@ jobs:
           java-version: ${{ matrix.java }}
           cache: maven
 
+      # `bash mvnw` rather than `./mvnw`: the wrapper works even if the executable
+      # bit is lost when the repository is cloned on a filesystem that does not
+      # carry one, which is a real risk for contributors on Windows.
       - name: Build and test
-        run: ./mvnw -B verify
+        run: bash mvnw -B verify
 
       - name: Run the example
-        run: java -jar tollgate-example/target/tollgate-example-0.1.0.jar
+        run: java -Dfile.encoding=UTF-8 -jar tollgate-example/target/tollgate-example-0.1.0.jar
 
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-reports-jdk-${{ matrix.java }}
-          path: |
-            **/target/surefire-reports/
+          path: '**/target/surefire-reports/'
           retention-days: 7
 
   dependency-audit:
@@ -62,11 +67,26 @@ jobs:
 
       - name: Verify the core has no third-party runtime dependencies
         run: |
-          ./mvnw -B -q -pl tollgate-core dependency:list -DincludeScope=runtime -DoutputFile=deps.txt
-          echo "--- tollgate-core runtime dependencies ---"
-          cat deps.txt
-          if grep -qE ":(compile|runtime)" deps.txt; then
+          # Absolute output path: -DoutputFile is resolved relative to the module
+          # directory, not the reactor root, so a bare filename lands in
+          # tollgate-core/ and is invisible from here.
+          DEPS="$RUNNER_TEMP/core-runtime-deps.txt"
+
+          bash mvnw -B -q -pl tollgate-core dependency:list \
+            -DincludeScope=runtime \
+            -DoutputFile="$DEPS"
+
+          echo "--- resolved runtime dependencies ---"
+          cat "$DEPS"
+
+          # The module's own coordinates are reported without a scope, so anything
+          # carrying :compile or :runtime is a genuine third-party dependency.
+          offending=$(grep -E ":(compile|runtime)" "$DEPS" | grep -v 'io\.tollgate:' || true)
+
+          if [ -n "$offending" ]; then
             echo "::error::tollgate-core must not declare third-party runtime dependencies (see ADR-0001)"
+            echo "$offending"
             exit 1
           fi
+
           echo "Core is dependency-free."

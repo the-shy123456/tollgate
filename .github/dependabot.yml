@@ -7,18 +7,26 @@ updates:
       day: monday
       time: "06:00"
       timezone: "UTC"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
+    # Major upgrades change behaviour and need a human to read the release notes.
+    # Dependabot only proposes the ones that are safe to merge on a green build.
+    ignore:
+      - dependency-name: "*"
+        update-types: [ "version-update:semver-major" ]
     groups:
       spring-boot:
         patterns:
           - "org.springframework.boot:*"
+        update-types: [ "minor", "patch" ]
       test-dependencies:
         patterns:
           - "org.junit*"
           - "org.assertj:*"
+        update-types: [ "minor", "patch" ]
       maven-plugins:
         patterns:
           - "org.apache.maven.plugins:*"
+        update-types: [ "minor", "patch" ]
     labels:
       - "dependencies"
     commit-message:
@@ -29,6 +37,13 @@ updates:
     directory: "/"
     schedule:
       interval: monthly
+    open-pull-requests-limit: 2
+    # Action majors are breaking by definition: checkout v4 to v7 means new
+    # inputs, renamed outputs, and a different runtime. Those are reviewed by
+    # hand, not merged by a bot on a green CI run.
+    ignore:
+      - dependency-name: "*"
+        update-types: [ "version-update:semver-major" ]
     labels:
       - "dependencies"
       - "ci"
