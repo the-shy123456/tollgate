@@ -1,11 +1,11 @@
 blank_issues_enabled: false
 contact_links:
   - name: Security vulnerability
-    url: https://github.com/tollgate-io/tollgate/security/advisories/new
+    url: https://github.com/the-shy123456/tollgate/security/advisories/new
     about: Report a cache leak or other security issue privately. Do not open a public issue.
   - name: Question or design discussion
-    url: https://github.com/tollgate-io/tollgate/discussions
+    url: https://github.com/the-shy123456/tollgate/discussions
     about: Ask how something works, or discuss a design change before writing code.
   - name: Documentation
-    url: https://github.com/tollgate-io/tollgate/tree/main/docs
+    url: https://github.com/the-shy123456/tollgate/tree/main/docs
     about: Architecture, configuration reference and design decisions.

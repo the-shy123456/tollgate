@@ -36,7 +36,7 @@ a test proving the boundary still holds. Reviewers will ask for it.
 **Requirements:** JDK 17 or newer. Maven is not required — the wrapper is checked in.
 
 ```bash
-git clone https://github.com/tollgate-io/tollgate.git
+git clone https://github.com/the-shy123456/tollgate.git
 cd tollgate
 ./mvnw verify
 ```

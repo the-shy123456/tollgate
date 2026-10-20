@@ -4,9 +4,9 @@
 
 **面向 JVM 团队的 LLM 流量治理、成本控制与语义缓存层。**
 
-[![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
-[![Tests](https://img.shields.io/badge/tests-99%20passing-brightgreen)](#)
-[![Java](https://img.shields.io/badge/java-17%2B-orange)](#)
+[![CI](https://github.com/the-shy123456/tollgate/actions/workflows/ci.yml/badge.svg)](https://github.com/the-shy123456/tollgate/actions/workflows/ci.yml)
+[![Java](https://img.shields.io/badge/java-17%2B-orange)](pom.xml)
+[![Runtime deps](https://img.shields.io/badge/core%20runtime%20deps-none-brightgreen)](docs/design-decisions.md#adr-0001)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 [![Status](https://img.shields.io/badge/status-0.1.0%20pre--release-yellow)](#)
 
@@ -102,7 +102,7 @@ public class SupportService {
 **或者一行代码不写，直接看效果：**
 
 ```bash
-git clone https://github.com/tollgate-io/tollgate.git
+git clone https://github.com/the-shy123456/tollgate.git
 cd tollgate
 ./mvnw -pl tollgate-example -am package -DskipTests
 java -jar tollgate-example/target/tollgate-example-0.1.0.jar

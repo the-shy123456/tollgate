@@ -70,5 +70,5 @@ should be expected before 1.0.
 - Non-numeric identifiers are not covered by the literal guard.
 - `HashingEmbeddingProvider` recognises near-duplicate wording, not paraphrase.
 
-[Unreleased]: https://github.com/tollgate-io/tollgate/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/tollgate-io/tollgate/releases/tag/v0.1.0
+[Unreleased]: https://github.com/the-shy123456/tollgate/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/the-shy123456/tollgate/releases/tag/v0.1.0

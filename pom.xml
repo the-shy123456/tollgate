@@ -11,7 +11,7 @@
 
   <name>Tollgate</name>
   <description>Governance, cost control and semantic caching for LLM traffic in the Java ecosystem.</description>
-  <url>https://github.com/tollgate-io/tollgate</url>
+  <url>https://github.com/the-shy123456/tollgate</url>
 
   <licenses>
     <license>
@@ -24,14 +24,14 @@
   <developers>
     <developer>
       <name>Tollgate Contributors</name>
-      <url>https://github.com/tollgate-io/tollgate/graphs/contributors</url>
+      <url>https://github.com/the-shy123456/tollgate/graphs/contributors</url>
     </developer>
   </developers>
 
   <scm>
-    <connection>scm:git:git://github.com/tollgate-io/tollgate.git</connection>
-    <developerConnection>scm:git:ssh://github.com/tollgate-io/tollgate.git</developerConnection>
-    <url>https://github.com/tollgate-io/tollgate</url>
+    <connection>scm:git:git://github.com/the-shy123456/tollgate.git</connection>
+    <developerConnection>scm:git:ssh://github.com/the-shy123456/tollgate.git</developerConnection>
+    <url>https://github.com/the-shy123456/tollgate</url>
   </scm>
 
   <modules>
